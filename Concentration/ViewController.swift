@@ -46,6 +46,13 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func resetGame(_ sender: UIButton) {
+        flipCount = 0
+        emojiChoices = ["😀","👻","🎃","👸🏽","🥸","🥴","🤟🏽","🤜🏼"]
+        game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+        updateViewFromModel()
+    }
+    
     var emojiChoices = ["😀","👻","🎃","👸🏽","🥸","🥴","🤟🏽","🤜🏼"]
     
     //Dictionary
@@ -58,8 +65,6 @@ class ViewController: UIViewController {
                 emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
         }
     }
-        
-        
         //2 Ways to handle the optional:
         
 //        if emoji[card.identifier] != nil{
