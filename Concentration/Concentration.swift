@@ -19,7 +19,10 @@ class Concentration{
     var seenCards = [Int:Int]()
 
     var indexOfOneAndOnlyFaceUpCard: Int?
-    
+     
+    //The beginning of our game
+    var previousClick = Date()
+
     func chooseCard(at index: Int){
         if !cards[index].isMatched{
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
@@ -57,6 +60,15 @@ class Concentration{
             flipCount += 1
         }
         
+        //The time of the last click a player made plus another 30 seconds
+        let future = Date(timeInterval: 30, since: previousClick)
+        
+        let fallsBetween = (previousClick ... future).contains(Date())
+        //If the player hadn't play for 30 seconds he is punished with -3 points
+        if !fallsBetween{
+            score -= 3
+        }
+        previousClick = Date()
     }
     
     init(numberOfPairsOfCards: Int){
@@ -71,5 +83,6 @@ class Concentration{
             cards += [temp]
             i += 1
         }
+
     }
 }

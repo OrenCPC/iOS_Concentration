@@ -10,8 +10,13 @@ import UIKit
 class ViewController: UIViewController {
     
     lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
- 
-    var themeSet = 0
+    
+    override func viewDidLoad() {
+        emojiChoices = pickTheme()
+        updateViewFromModel()
+    }
+
+    lazy var themeSet = Int(arc4random_uniform(UInt32(5)))
     
     @IBOutlet weak var scoreCountLabel: UILabel!
         
@@ -29,6 +34,7 @@ class ViewController: UIViewController {
         }
     }
     
+    
     func updateViewFromModel(){
         for index in cardButtons.indices {
             let button = cardButtons[index]
@@ -38,7 +44,49 @@ class ViewController: UIViewController {
                 button.backgroundColor = UIColor.white
             } else {
                 button.setTitle("", for: UIControl.State.normal)
-                button.backgroundColor = card.isMatched ? UIColor.clear : UIColor.orange
+                if !card.isMatched {
+                    //Change the background color and cards color according to the chosen theme
+
+                    switch(themeSet){
+                    case 0:
+                        button.backgroundColor = UIColor.orange
+                        self.view.backgroundColor = UIColor.white
+
+                    case 1:
+                        button.backgroundColor = UIColor.black
+                        self.view.backgroundColor = UIColor.orange
+
+                    case 2:
+                        button.backgroundColor = UIColor.purple
+                        self.view.backgroundColor = UIColor.white
+
+                    case 3:
+                        button.backgroundColor = UIColor.lightGray
+                        self.view.backgroundColor = UIColor.darkGray
+
+                    case 4:
+                        button.backgroundColor = UIColor.darkGray
+                        self.view.backgroundColor = UIColor.lightGray
+
+                    case 5:
+                        button.backgroundColor = UIColor.yellow
+                        self.view.backgroundColor = UIColor.magenta
+
+                    case 6:
+                        button.backgroundColor = UIColor.magenta
+                        self.view.backgroundColor = UIColor.yellow
+
+                    case 7:
+                        button.backgroundColor = UIColor.purple
+                        self.view.backgroundColor = UIColor.cyan
+
+                    default:
+                        button.backgroundColor = UIColor.cyan
+                    
+                }
+                } else{
+                    button.backgroundColor = UIColor.clear
+                }
             }
         }
         scoreCountLabel.text = "Score \(game.score)"
@@ -49,28 +97,6 @@ class ViewController: UIViewController {
         game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
         emojiChoices = pickTheme()
         updateViewFromModel()
-        
-        //Change the background color according to the chosen theme
-        switch(themeSet){
-        case 0:
-            self.view.backgroundColor = UIColor.white
-        case 1:
-            self.view.backgroundColor = UIColor.green
-        case 2:
-            self.view.backgroundColor = UIColor.brown
-        case 3:
-            self.view.backgroundColor = UIColor.darkGray
-        case 4:
-            self.view.backgroundColor = UIColor.lightGray
-        case 5:
-            self.view.backgroundColor = UIColor.magenta
-        case 6:
-            self.view.backgroundColor = UIColor.yellow
-        case 7:
-            self.view.backgroundColor = UIColor.cyan
-        default:
-            self.view.backgroundColor = UIColor.purple
-        }
     }
     
     
@@ -87,7 +113,7 @@ class ViewController: UIViewController {
             let tempEmoji = emojiList[8*randomIndex + index]
             emojiChoices += [tempEmoji]
         }
-        themeSet = randomIndex
+         themeSet = randomIndex
         return emojiChoices
     }
     
