@@ -11,11 +11,21 @@ class ViewController: UIViewController {
     
     lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
  
-    var flipCount = 0 {
-        didSet{
-            flipCountLabel.text = "Flips: \(flipCount)"
-        }
-    }
+//    var flipCount = 0 {
+//        didSet{
+//            flipCountLabel.text = "Flips: \(flipCount)"
+//        }
+//    }
+    
+//    var scoreCount = 0 {
+//        didSet{
+//            scoreCountLabel.text = "Score \(scoreCount)"
+//        }
+//    }
+//    var seenCards = [Int:String]()
+
+    
+    @IBOutlet weak var scoreCountLabel: UILabel!
     
     //Same as Array<UIButtons>!
     @IBOutlet var cardButtons: [UIButton]!
@@ -23,7 +33,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var flipCountLabel: UILabel!
         
     @IBAction func touchCard(_ sender: UIButton) {
-    flipCount += 1
+//    flipCount += 1
         if let cardNumber = cardButtons.firstIndex(of: sender){
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
@@ -44,10 +54,12 @@ class ViewController: UIViewController {
                 button.backgroundColor = card.isMatched ? UIColor.clear : UIColor.orange
             }
         }
+        scoreCountLabel.text = "Score \(game.score)"
+        flipCountLabel.text = "Flips: \(game.flipCount)"
     }
     
     @IBAction func resetGame(_ sender: UIButton) {
-        flipCount = 0
+//        flipCount = 0
         game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
         emojiChoices = pickTheme()
         updateViewFromModel()
