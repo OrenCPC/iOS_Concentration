@@ -11,21 +11,9 @@ class ViewController: UIViewController {
     
     lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
  
-//    var flipCount = 0 {
-//        didSet{
-//            flipCountLabel.text = "Flips: \(flipCount)"
-//        }
-//    }
-    
-//    var scoreCount = 0 {
-//        didSet{
-//            scoreCountLabel.text = "Score \(scoreCount)"
-//        }
-//    }
-//    var seenCards = [Int:String]()
-
-    
     @IBOutlet weak var scoreCountLabel: UILabel!
+    
+     var themeSet = 0
     
     //Same as Array<UIButtons>!
     @IBOutlet var cardButtons: [UIButton]!
@@ -33,7 +21,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var flipCountLabel: UILabel!
         
     @IBAction func touchCard(_ sender: UIButton) {
-//    flipCount += 1
         if let cardNumber = cardButtons.firstIndex(of: sender){
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
@@ -47,7 +34,7 @@ class ViewController: UIViewController {
             let button = cardButtons[index]
             let card = game.cards[index]
             if card.isFaceUp{
-                button.setTitle(emoji(for: card), for: UIControl.State.normal)
+                button.setTitle(emoji(for: card), for: .normal)
                 button.backgroundColor = UIColor.white
             } else {
                 button.setTitle("", for: UIControl.State.normal)
@@ -59,11 +46,33 @@ class ViewController: UIViewController {
     }
     
     @IBAction func resetGame(_ sender: UIButton) {
-//        flipCount = 0
         game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
         emojiChoices = pickTheme()
         updateViewFromModel()
+        
+        //Change the background color according to the chosen theme
+        switch(themeSet){
+        case 0:
+            self.view.backgroundColor = UIColor.white
+        case 1:
+            self.view.backgroundColor = UIColor.green
+        case 2:
+            self.view.backgroundColor = UIColor.brown
+        case 3:
+            self.view.backgroundColor = UIColor.darkGray
+        case 4:
+            self.view.backgroundColor = UIColor.lightGray
+        case 5:
+            self.view.backgroundColor = UIColor.magenta
+        case 6:
+            self.view.backgroundColor = UIColor.yellow
+        case 7:
+            self.view.backgroundColor = UIColor.cyan
+        default:
+            self.view.backgroundColor = UIColor.purple
+        }
     }
+    
     
      func pickTheme() -> [String] {
         let emojiList = ["😀","👻","🎃","👸🏽","🥸","🥴","🤟🏽","🤜🏼",//Original
@@ -78,11 +87,11 @@ class ViewController: UIViewController {
             let tempEmoji = emojiList[8*randomIndex + index]
             emojiChoices += [tempEmoji]
         }
+        themeSet = randomIndex
         return emojiChoices
     }
     
     lazy var emojiChoices = pickTheme()
-//    var emojiChoices = ["😀","👻","🎃","👸🏽","🥸","🥴","🤟🏽","🤜🏼"]
 
     //Dictionary
     var emoji = [Int:String]()
@@ -94,18 +103,8 @@ class ViewController: UIViewController {
                 emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
         }
     }
-        //2 Ways to handle the optional:
-        
-//        if emoji[card.identifier] != nil{
-//            return emoji[card.identifier]!
-//        } else {
-//            return "?"
-//        }
-        
         return emoji[card.identifier] ?? "?"
     }
-    
-    
 }
 
 
