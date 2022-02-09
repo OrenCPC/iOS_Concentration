@@ -48,13 +48,30 @@ class ViewController: UIViewController {
     
     @IBAction func resetGame(_ sender: UIButton) {
         flipCount = 0
-        emojiChoices = ["😀","👻","🎃","👸🏽","🥸","🥴","🤟🏽","🤜🏼"]
         game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+        emojiChoices = pickTheme()
         updateViewFromModel()
     }
     
-    var emojiChoices = ["😀","👻","🎃","👸🏽","🥸","🥴","🤟🏽","🤜🏼"]
+     func pickTheme() -> [String] {
+        let emojiList = ["😀","👻","🎃","👸🏽","🥸","🥴","🤟🏽","🤜🏼",//Original
+                         "🙈","🦃","🐶","🐭","🐹","🦊","🐻","🐰",//Animals
+                         "🍋","🍇","🍏","🍉","🍌","🍊","🍐","🍎",//Fruits
+                         "⚽️","🏀","🏈","⚾️","🥎","🏐","🥏","🪀",//Sports
+                         "🚗","🚕","🚙","🚌","🏎","🚓","🚐","🛴",//Vehicles
+                         "⌚️","📱","⌨️","🖥","💽","🖨","💡","🧭"]//Electricity
+        var emojiChoices = [String]()
+        let randomIndex = Int(arc4random_uniform(UInt32(5)))
+        for index in 0...7{
+            let tempEmoji = emojiList[8*randomIndex + index]
+            emojiChoices += [tempEmoji]
+        }
+        return emojiChoices
+    }
     
+    lazy var emojiChoices = pickTheme()
+//    var emojiChoices = ["😀","👻","🎃","👸🏽","🥸","🥴","🤟🏽","🤜🏼"]
+
     //Dictionary
     var emoji = [Int:String]()
     

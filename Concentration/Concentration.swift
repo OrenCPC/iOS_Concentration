@@ -46,7 +46,7 @@ class Concentration{
             let randomIndex = Int(arc4random_uniform(UInt32(numberOfPairsOfCards - 1)))
             let temp = cards.remove(at: randomIndex)
             cards += [temp]
-            i += 2
+            i += 1
         }
     }
 }
