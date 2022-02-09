@@ -11,10 +11,10 @@ class ViewController: UIViewController {
     
     lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
  
+    var themeSet = 0
+    
     @IBOutlet weak var scoreCountLabel: UILabel!
-    
-     var themeSet = 0
-    
+        
     //Same as Array<UIButtons>!
     @IBOutlet var cardButtons: [UIButton]!
     
