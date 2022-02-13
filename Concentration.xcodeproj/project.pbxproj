@@ -15,6 +15,7 @@
 		6843DAD127B17BF40041ED18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6843DACF27B17BF40041ED18 /* LaunchScreen.storyboard */; };
 		6843DADA27B28A0B0041ED18 /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6843DAD927B28A0B0041ED18 /* Concentration.swift */; };
 		6843DADC27B28B220041ED18 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6843DADB27B28B220041ED18 /* Card.swift */; };
+		6843DADE27B8F9300041ED18 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6843DADD27B8F9300041ED18 /* Theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		6843DAD227B17BF40041ED18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6843DAD927B28A0B0041ED18 /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
 		6843DADB27B28B220041ED18 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		6843DADD27B8F9300041ED18 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				6843DAD827B17E1A0041ED18 /* Supporting files */,
 				6843DAC627B17BF30041ED18 /* SceneDelegate.swift */,
 				6843DAC827B17BF30041ED18 /* ViewController.swift */,
+				6843DADD27B8F9300041ED18 /* Theme.swift */,
 				6843DACA27B17BF30041ED18 /* Main.storyboard */,
 				6843DAD927B28A0B0041ED18 /* Concentration.swift */,
 				6843DADB27B28B220041ED18 /* Card.swift */,
@@ -155,6 +158,7 @@
 				6843DAC927B17BF30041ED18 /* ViewController.swift in Sources */,
 				6843DADA27B28A0B0041ED18 /* Concentration.swift in Sources */,
 				6843DADC27B28B220041ED18 /* Card.swift in Sources */,
+				6843DADE27B8F9300041ED18 /* Theme.swift in Sources */,
 				6843DAC527B17BF30041ED18 /* AppDelegate.swift in Sources */,
 				6843DAC727B17BF30041ED18 /* SceneDelegate.swift in Sources */,
 			);
