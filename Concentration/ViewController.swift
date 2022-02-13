@@ -11,18 +11,28 @@ class ViewController: UIViewController {
     
     private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
     
-    lazy var themeSet = Theme()
-
-    private lazy var emojiChoices = themeSet.emojiChoices
+    lazy var themes: [Theme] = [
+        Theme(emojiChoices: ["😀","👻","🎃","👸🏽","🥸","🥴","🤟🏽","🤜🏼"], buttonBackgroundColor: UIColor.orange, screenBackgroundColor: UIColor.white, themeName: "Original"),
+        Theme(emojiChoices: ["🙈","🦃","🐶","🐭","🐹","🦊","🐻","🐰"],  buttonBackgroundColor: UIColor.black, screenBackgroundColor: UIColor.orange, themeName: "Animals"),
+        Theme(emojiChoices: ["🍋","🍇","🍏","🍉","🍌","🍊","🍐","🍎"], buttonBackgroundColor: UIColor.purple, screenBackgroundColor: UIColor.white, themeName: "Fruits"),
+        Theme(emojiChoices: ["⚽️","🏀","🏈","⚾️","🥎","🏐","🥏","🪀"], buttonBackgroundColor: UIColor.lightGray, screenBackgroundColor: UIColor.darkGray, themeName: "Sports"),
+        Theme(emojiChoices: ["🚗","🚕","🚙","🚌","🏎","🚓","🚐","🛴"], buttonBackgroundColor: UIColor.darkGray, screenBackgroundColor: UIColor.lightGray, themeName: "Vehicles"),
+        Theme(emojiChoices: ["⌚️","📱","⌨️","🖥","💽","🖨","💡","🧭"], buttonBackgroundColor: UIColor.cyan, screenBackgroundColor: UIColor.white, themeName: "Electricity")
+    ]
     
+    lazy var currentTheme: Theme = Theme(emojiChoices: ["😀","👻","🎃","👸🏽","🥸","🥴","🤟🏽","🤜🏼"], buttonBackgroundColor: UIColor.orange, screenBackgroundColor: UIColor.white, themeName: "Original")
+    
+    private lazy var emojiChoices = currentTheme.emojiChoices
+        
     var numberOfPairsOfCards: Int {
         return (cardButtons.count + 1) / 2
     }
     
     func startGame(){
         game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
-        themeSet = Theme()
-        emojiChoices = themeSet.emojiChoices
+        let randomTheme = Int(arc4random_uniform(UInt32(themes.count)))
+        currentTheme = themes[randomTheme]
+        emojiChoices = currentTheme.emojiChoices
         updateViewFromModel()
     }
     
@@ -57,9 +67,8 @@ class ViewController: UIViewController {
             } else {
                 button.setTitle("", for: UIControl.State.normal)
                 if !card.isMatched {
-//                    updateColors(themeSet, button)
-                    button.backgroundColor = themeSet.buttonBackgroundColor
-                    self.view.backgroundColor = themeSet.screenBackgroundColor
+                    button.backgroundColor = currentTheme.buttonBackgroundColor
+                    self.view.backgroundColor = currentTheme.screenBackgroundColor
                     
                 } else {
                     button.backgroundColor = UIColor.clear
